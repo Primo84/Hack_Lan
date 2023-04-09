@@ -1,0 +1,35 @@
+#pragma once
+
+#include"FileDef.h"
+
+
+NDIS_FILTER_DRIVER_CHARACTERISTICS FilterDriverChar;
+NDIS_HANDLE FilterHandle;
+BOOLEAN FilterRegistered;
+
+int miniportsCount;
+LIST_ENTRY MiniportsEntries;
+
+int RegisterFilterDriver(PDRIVER_OBJECT Driver);
+
+
+FILTER_SET_OPTIONS FilterSetOptions;
+FILTER_SET_MODULE_OPTIONS SetFilterModuleOptions;
+FILTER_ATTACH FilterAttach;
+FILTER_DETACH  FilterDetach;
+FILTER_RESTART FilterRestart;
+FILTER_PAUSE FilterPause;
+FILTER_SEND_NET_BUFFER_LISTS FilterSendNetBufferLists;
+FILTER_SEND_NET_BUFFER_LISTS_COMPLETE FilterSendNetBufferListsComplete;
+FILTER_CANCEL_SEND_NET_BUFFER_LISTS FilterCancelSendNetBufferLists;
+FILTER_RECEIVE_NET_BUFFER_LISTS FilterReceiveNetBufferLists;
+FILTER_RETURN_NET_BUFFER_LISTS FilterReturnNetBufferLists;
+FILTER_OID_REQUEST FilterOidRequest;
+FILTER_OID_REQUEST_COMPLETE FilterOidRequestComplete;
+FILTER_CANCEL_OID_REQUEST FilterCancelOidRequest;
+FILTER_DEVICE_PNP_EVENT_NOTIFY FilterDevicePnpEventNotify;
+FILTER_NET_PNP_EVENT FilterNetPnpEvent;
+FILTER_STATUS FilterStatus;
+FILTER_DIRECT_OID_REQUEST FilterDirectOidRequest;
+FILTER_DIRECT_OID_REQUEST_COMPLETE FilterDirectOidRequestComplete;
+FILTER_CANCEL_DIRECT_OID_REQUEST FilterCancelDirectOidRequest;

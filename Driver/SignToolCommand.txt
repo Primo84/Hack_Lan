@@ -1,0 +1,1 @@
+signtool sign /v /s PrivateCertStores /n MyCert /t http://timestamp.digicert.com FHacklan.sys
