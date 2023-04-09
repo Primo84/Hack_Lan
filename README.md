@@ -8,3 +8,4 @@ hlanfilter.inf i hlanprotocol.inf - pliki instalatora. Dzieki zainstalowanym ste
 Umożliwiają one przechwytywanie oraz wysyłanie pakietów. Sterownik filtra ma możliwość przechwycić pakiety zarówno odbierane jak i wysyłane. 
 Bilioteka zostałą zaprojektowana tak aby dawała możliwość ustawiania nowych wątków w celu przesyłania przechwyconych pakietów do aplikacji użytkownika. 
 Dzięki zaprojektowanej synchronizacji sterowniki są w stanie obsłużyć wile takich aplikacji.
+Sniffer - projekt przykładowej aplikacji konsolowej zaprojektowanej w celu testowania oraz instalacji sterowników.
