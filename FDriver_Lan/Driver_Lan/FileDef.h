@@ -88,6 +88,46 @@ typedef enum Filter_State
 	FilterPaused
 }FilterState;
 
+typedef enum _PHYSICALMEDIUM
+{
+	PhysicalMediumUnspecified,
+	PhysicalMediumWirelessLan,
+	PhysicalMediumCableModem,
+	PhysicalMediumPhoneLine,
+	PhysicalMediumPowerLine,
+	PhysicalMediumDSL,      // includes ADSL and UADSL (G.Lite)
+	PhysicalMediumFibreChannel,
+	PhysicalMedium1394,
+	PhysicalMediumWirelessWan,
+	PhysicalMediumNative802_11,
+	PhysicalMediumBluetooth,
+	PhysicalMediumInfiniband,
+	PhysicalMediumWiMax,
+	PhysicalMediumUWB,
+	PhysicalMedium802_3,
+	PhysicalMedium802_5,
+	PhysicalMediumIrda,
+	PhysicalMediumWiredWAN,
+	PhysicalMediumWiredCoWan,
+	PhysicalMediumOther,
+	PhysicalMediumNative802_15_4,
+	PhysicalMediumMax
+} PHYSICALMEDIUM;
+
+typedef enum _MEDIA_CONNECT_STATE
+{
+	ConnectStateUnknown,
+	ConnectStateConnected,
+	ConnectStateDisconnected
+} MEDIA_CONNECT_STATE;
+
+typedef enum _MEDIA_DUPLEX_STATE
+{
+	DuplexStateUnknown,
+	DuplexStateHalf,
+	DuplexStateFull
+} MEDIA_DUPLEX_STATE;
+
 typedef struct Filter_ModuleHandle
 {
 	LIST_ENTRY ListE;
@@ -123,9 +163,16 @@ typedef struct UserMiniport
 	int HandleCount;
 	int miniportCount;
 	int Index;
-	int Hooked;
+	int RecvHooked;
+	int SendHooked;
 	int licznik;
-
+	ULONG64 XmitLinkSpeed;
+	ULONG64 RcvLinkSpeed;
+	USHORT MacAddressLength;
+	UCHAR CurrentMacAddress[32];
+	PHYSICALMEDIUM PhysicalMediumType;
+	MEDIA_CONNECT_STATE MediaConnectState;
+	MEDIA_DUPLEX_STATE MediaDuplexState;
 }Userminiport, * PUserminiport;
 
 ULONG32 PACKET_COUNT;

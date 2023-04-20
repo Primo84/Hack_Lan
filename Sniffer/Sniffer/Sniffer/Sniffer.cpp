@@ -155,7 +155,8 @@ int main(int argc, char* argv[])
 			printf("Miniport nr %d\n", i + 1);
 			printf("	Miniport Name: %ws\n", MiniP[i].MiniportName);
 			printf("	Miniport Index : %d\n", MiniP[i].Index);
-			MiniP[i].Hooked = 1;
+			MiniP[i].RecvHooked = 1;
+			MiniP[i].SendHooked = 1;
 		}
 	}
 	do

@@ -1018,6 +1018,7 @@ void ProtocolReceiveNetBufferLists(NDIS_HANDLE ProtocolBindingContext, PNET_BUFF
 
 			NdisReturnNetBufferLists(Adapter->Adapter_Handle,NetBufferLists,RetFlags);
 		}
+		return;
 	}
 
 	

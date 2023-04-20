@@ -204,8 +204,6 @@ void  FilterDetach(IN NDIS_HANDLE FilterModuleContext)
 	mp = (miniport*)fmh->MP;
 
 	DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_WARNING_LEVEL, "Filter Module Name : %s",mp->MiniportName);
-	DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_WARNING_LEVEL, "Filter Handle Relased : %x",fmh->MiniportHandle);
-
 
 	RemoveEntryList(&fmh->ListE);
 	
@@ -218,6 +216,8 @@ void  FilterDetach(IN NDIS_HANDLE FilterModuleContext)
 		ExFreePool(mp->SPacket);
 		ExFreePool(mp->RPacket);
 		ExFreePool(mp);
+		if (miniportsCount > 0)
+			miniportsCount--;
 		DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_WARNING_LEVEL, "Miniport relased ");
 	}
 }

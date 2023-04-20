@@ -297,6 +297,8 @@ NTSTATUS HDeviceIOControl(__in DEVICE_OBJECT* Device, __inout IRP* irp)
 	PLIST_ENTRY PL;
 	miniport* MP;
 	Userminiport *UMP;
+	PLIST_ENTRY PLFM;
+	filterModuleHandle *fmh;
 
 	stack = IoGetCurrentIrpStackLocation(irp);
 	code = stack->Parameters.DeviceIoControl.IoControlCode;
@@ -335,12 +337,27 @@ NTSTATUS HDeviceIOControl(__in DEVICE_OBJECT* Device, __inout IRP* irp)
 				while (PL != &MiniportsEntries)
 				{
 					MP = (miniport*)CONTAINING_RECORD(PL, miniport, ListE);
+					memset(UMP, 0, sizeof(Userminiport));
+
 					memcpy(UMP->MiniportName, MP->MiniportName,250);
 					UMP->HandleCount = MP->HandleCount;
 					UMP->Index = MP->Index;
 					UMP->miniportCount = miniportsCount;
-					UMP->Hooked = 0;
+					UMP->RecvHooked = 0;
+					UMP->SendHooked = 0;
 					UMP->licznik = 0;
+					if (MP->HandleCount > 0)
+					{
+						PLFM = MP->ModeuleEntries.Flink;
+						fmh = (filterModuleHandle*)CONTAINING_RECORD(PLFM, filterModuleHandle, ListE);
+						UMP->MediaConnectState = (MEDIA_CONNECT_STATE)fmh->FAP.MediaConnectState;
+						UMP->PhysicalMediumType = (PHYSICALMEDIUM)fmh->FAP.MiniportPhysicalMediaType;
+						UMP->MediaDuplexState = (MEDIA_DUPLEX_STATE)fmh->FAP.MediaDuplexState;
+						UMP->RcvLinkSpeed = fmh->FAP.RcvLinkSpeed;
+						UMP->XmitLinkSpeed = fmh->FAP.XmitLinkSpeed;
+						UMP->MacAddressLength = fmh->FAP.MacAddressLength;
+						memcpy(UMP->CurrentMacAddress, fmh->FAP.CurrentMacAddress, 32);
+					}
 					PL = PL->Flink;
 					if (PL != &MiniportsEntries)
 						UMP++;

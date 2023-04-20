@@ -67,6 +67,12 @@ typedef enum _MEDIA_CONNECT_STATE
 	ConnectStateDisconnected
 } MEDIA_CONNECT_STATE;
 
+typedef enum _MEDIA_DUPLEX_STATE
+{
+	DuplexStateUnknown,
+	DuplexStateHalf,
+	DuplexStateFull
+} MEDIA_DUPLEX_STATE;
 
 typedef struct UserMiniport
 {
@@ -74,8 +80,16 @@ typedef struct UserMiniport
 	int HandleCount;
 	int miniportCount;
 	int Index;
-	int Hooked;
+	int RecvHooked;
+	int SendHooked;
 	int licznik;
+	ULONG64 XmitLinkSpeed;
+	ULONG64 RcvLinkSpeed;
+	USHORT MacAddressLength;
+	UCHAR CurrentMacAddress[32];
+	PHYSICALMEDIUM PhysicalMediumType;
+	MEDIA_CONNECT_STATE MediaConnectState;
+	MEDIA_DUPLEX_STATE MediaDuplexState;
 
 }Userminiport, * PUserminiport;
 

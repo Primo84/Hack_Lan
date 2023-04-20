@@ -145,7 +145,7 @@ DWORD WINAPI MPFunR(PVOID p)
 		UMP = MiniP;
 		for (i = 0; i < MPCount; i++)
 		{
-			if (UMP->Hooked == 1)
+			if (UMP->RecvHooked == 1)
 			{
 				memset(&MP_RPacket, 0, sizeof(RecvPack));
 				MP_RPacket.odebrane = 0;
@@ -256,7 +256,7 @@ DWORD WINAPI MPFunS(PVOID p)
 		UMP = MiniP;
 		for (i = 0; i < MPCount; i++)
 		{
-			if (UMP->Hooked == 1)
+			if (UMP->SendHooked == 1)
 			{
 				memset(&MP_SPacket, 0, sizeof(RecvPack));
 				MP_SPacket.odebrane = 0;
